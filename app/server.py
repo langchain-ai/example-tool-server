@@ -50,7 +50,7 @@ app.add_auth(auth)
 @auth.authenticate
 async def authenticate(authorization: str) -> dict:
     """Authenticate the user based on the Authorization header."""
-    if not hmac.compare_digest(authorization, APP_SECRET):
+    if not authorization or not hmac.compare_digest(authorization, APP_SECRET):
         raise Auth.exceptions.HTTPException(status_code=401, detail="Unauthorized")
 
     return {
