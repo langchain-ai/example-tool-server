@@ -5,6 +5,11 @@ import os
 
 from langchain_core.tools import tool
 from open_tool_server import Server, Auth
+from tools.hackernews import search_hackernews
+from tools.github import get_github_issues
+from tools.exchange_rate import get_exchange_rate
+from tools.wikipedia import get_current_events
+from tools.reddit import search_reddit_news
 
 
 def _get_app_secret() -> str:
@@ -41,6 +46,14 @@ async def get_weather(city: str) -> str:
 
 
 app.tool(get_weather)
+
+# Add some real tools
+app.tool(search_hackernews)
+app.tool(get_github_issues)
+app.tool(get_exchange_rate)
+app.tool(search_hackernews)
+app.tool(get_current_events)
+
 
 # Add the authentication handler
 auth = Auth()
