@@ -48,12 +48,16 @@ async def get_weather(city: str) -> str:
 app.tool(get_weather)
 
 # Add some real tools
-app.tool(search_hackernews)
-app.tool(get_github_issues)
-app.tool(get_exchange_rate)
-app.tool(search_hackernews)
-app.tool(get_current_events)
+TOOLS = [
+    search_hackernews,
+    get_github_issues,
+    get_exchange_rate,
+    get_current_events,
+    search_reddit_news,
+]
 
+for tool in TOOLS:
+    app.tool(tool)
 
 # Add the authentication handler
 auth = Auth()
