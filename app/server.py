@@ -5,11 +5,12 @@ import os
 
 from langchain_core.tools import tool
 from open_tool_server import Server, Auth
-from tools.hackernews import search_hackernews
-from tools.github import get_github_issues
-from tools.exchange_rate import get_exchange_rate
-from tools.wikipedia import get_current_events
-from tools.reddit import search_reddit_news
+
+from app.tools.exchange_rate import get_exchange_rate
+from app.tools.github import get_github_issues
+from app.tools.hackernews import search_hackernews
+from app.tools.reddit import search_reddit_news
+from app.tools.wikipedia import get_current_events
 
 
 def _get_app_secret() -> str:
