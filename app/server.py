@@ -29,6 +29,7 @@ app = Server()
 
 @app.tool()
 async def echo(msg: str) -> str:
+    """Echo a message appended with an exclamation mark."""
     return msg + "!"
 
 
