@@ -17,8 +17,8 @@ ENV UV_COMPILE_BYTECODE=1
 ADD . /app
 
 # Sync the project into a new environment, using the frozen lockfile
-RUN uv sync --frozen
 WORKDIR /app
+RUN uv sync --frozen
 
 # Run the FastAPI application by default
 # Uses `fastapi dev` to enable hot-reloading when the `watch` sync occurs
