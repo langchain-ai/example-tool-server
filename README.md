@@ -1,8 +1,6 @@
 # Example Tool Server
 
-An example implementation of a tool server using `open-tool-server`.
-
-https://github.com/langchain-ai/open-tool-server
+An example implementation of a tool server using [universal-tool-server](https://github.com/langchain-ai/universal-tool-server).
 
 ## Tools
 
