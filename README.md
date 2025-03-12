@@ -76,11 +76,13 @@ Alternatively, deploy to your favorite cloud provider.
 
 Once the server is running you can use the universal-tool-client to interact with it. 
 
+### Python
+
 ```shell
 pip install universal-tool-client
 ```
 
-### Client
+#### Sync
 
 ```python
 from universal_tool_client import get_sync_client
@@ -104,7 +106,16 @@ print(client.tools.call("echo", {"msg": "hello"}))  # hello!
 tools = client.tools.as_langchain_tools()
 ```
 
-#### Curl
+#### Async
+
+Use the async client instead of the sync client.
+
+```python
+from universal_tool_client import get_async_client
+```
+
+
+### Curl
 
 No authentication:
 
