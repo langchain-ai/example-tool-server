@@ -34,31 +34,32 @@ The server implements a very basic form of authentication that supports a single
 
 1. Generate a secret using your favorite random number generator
 
-```shell
-export APP_SECRET=$(openssl rand -base64 32 )
-```
+   ```shell
+   export APP_SECRET=$(openssl rand -base64 32 )
+   ```
 
-or
+   or
 
-```shell
-export APP_SECRET=$(head -c 32 /dev/urandom | base64)
-```
+   ```shell
+   export APP_SECRET=$(head -c 32 /dev/urandom | base64)
+   ```
 
-or
+   or
 
-```shell
-export APP_SECRET=$( let your cat walk across your keyboard)
-```
+   ```shell
+   export APP_SECRET=$( let your cat walk across your keyboard)
+   ```
 
 2. Run with `uv`
-
-```shell
-APP_SECRET=$APP_SECRET uv run uvicorn app.server:app 
-````
+ 
+   ```shell
+   APP_SECRET=$APP_SECRET uv run uvicorn app.server:app 
+   ````
 
 ### Docker
 
 1. Build with docker
+ 
     ```shell
     docker build -t example-tool-server .
     ```
