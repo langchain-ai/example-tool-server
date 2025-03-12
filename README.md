@@ -131,5 +131,9 @@ e.g., `-H 'Authorization: YOUR SECRET`
 You will see a result like:
 
 ```json
-{"call_id":"5146df4f-5b3c-417e-9b2e-c6793df5fdf2","success":true,"value":"The weather in san francisco is nice today with a high of 75°F."}
+{
+  "call_id": "b5b034c5-064e-4f72-9ffc-842bf6f38ef9",
+  "success": true,
+  "value": "The weather in san francisco is nice today with a high of 75°F."
+}
 ```
