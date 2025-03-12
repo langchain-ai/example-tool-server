@@ -10,7 +10,6 @@ This server implements the following example tools:
 2. GithHub API: surface most recent 50 issues for a given github repository.
 3. Hacker News: query hacker news to find the 5 most relevant matches.
 4. Reddit: Query reddit for a particular topic
-5. Wikipedia: Get information about current events.
 
 ## Usage
 
