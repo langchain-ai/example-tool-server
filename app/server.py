@@ -4,13 +4,12 @@ import hmac
 import os
 
 from langchain_core.tools import tool
-from open_tool_server import Server, Auth
+from universal_tool_server import Server, Auth
 
 from app.tools.exchange_rate import get_exchange_rate
 from app.tools.github import get_github_issues
 from app.tools.hackernews import search_hackernews
 from app.tools.reddit import search_reddit_news
-from app.tools.wikipedia import get_current_events
 
 
 def _get_app_secret() -> str:
@@ -46,19 +45,18 @@ async def get_weather(city: str) -> str:
     return f"The weather in {city} is nice today with a high of 75°F."
 
 
-app.tool(get_weather)
+app.add_tool(get_weather)
 
 # Add some real tools
 TOOLS = [
     search_hackernews,
     get_github_issues,
     get_exchange_rate,
-    get_current_events,
     search_reddit_news,
 ]
 
-for tool in TOOLS:
-    app.tool(tool)
+for tool_ in TOOLS:
+    app.add_tool(tool_)
 
 # Add the authentication handler
 auth = Auth()

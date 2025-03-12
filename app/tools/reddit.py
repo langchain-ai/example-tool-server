@@ -14,7 +14,7 @@ async def search_reddit_news(topic: str) -> str:
         or an error message if the request fails.
     """
     # Build URL to search within the 'news' subreddit (restrict_sr=1 limits the search to this subreddit)
-    url = f"https://www.reddit.com/r/news/search.json"
+    url = "https://www.reddit.com/r/news/search.json"
     headers = {"User-Agent": "Mozilla/5.0 (compatible; RedditNewsBot/0.1)"}
 
     params = {"q": topic, "restrict_sr": "1", "sort": "new"}

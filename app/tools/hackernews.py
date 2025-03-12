@@ -3,7 +3,7 @@ import httpx
 
 async def search_hackernews(query: str) -> str:
     """Search HackerNews for a given query and return the top 5 results."""
-    url = f"https://hn.algolia.com/api/v1/search"
+    url = "https://hn.algolia.com/api/v1/search"
     params = {
         "query": query,
     }
