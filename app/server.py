@@ -11,6 +11,8 @@ from app.tools.github import get_github_issues
 from app.tools.hackernews import search_hackernews
 from app.tools.reddit import search_reddit_news
 
+DISABLE_AUTH = os.environ.get("DISABLE_AUTH", "").lower() in ("true", "1")
+
 
 def _get_app_secret() -> str:
     """Get the app secret from the environment.
@@ -19,6 +21,12 @@ def _get_app_secret() -> str:
     a single "user" with a single secret key.
     """
     secret = os.environ.get("APP_SECRET")
+
+    if DISABLE_AUTH:
+        if secret:
+            raise ValueError("APP_SECRET is not needed when DISABLE_AUTH is enabled.")
+        return ""
+
     if not secret:
         raise ValueError("APP_SECRET environment variable is required.")
     if secret != secret.strip():
@@ -32,7 +40,7 @@ APP_SECRET = _get_app_secret()
 app = Server()
 
 
-@app.tool()
+@app.add_tool()
 async def echo(msg: str) -> str:
     """Echo a message appended with an exclamation mark."""
     return msg + "!"
@@ -66,6 +74,10 @@ app.add_auth(auth)
 @auth.authenticate
 async def authenticate(authorization: str) -> dict:
     """Authenticate the user based on the Authorization header."""
+    if DISABLE_AUTH:
+        return {
+            "identity": "unauthenticated-user",
+        }
     if not authorization or not hmac.compare_digest(authorization, APP_SECRET):
         raise Auth.exceptions.HTTPException(status_code=401, detail="Unauthorized")
 
