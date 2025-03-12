@@ -127,3 +127,9 @@ With authentication:
 Add the `Authorization` header with the secret you generated earlier.
 
 e.g., `-H 'Authorization: YOUR SECRET`
+
+You will see a result like:
+
+```json
+{"call_id":"5146df4f-5b3c-417e-9b2e-c6793df5fdf2","success":true,"value":"The weather in san francisco is nice today with a high of 75°F."}
+```
