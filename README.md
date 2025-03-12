@@ -25,7 +25,7 @@ DISABLE_AUTH=true uv run uvicorn app.server:app
 
 You'll need to have `uv` installed: https://docs.astral.sh/uv/
 
-With auth disabled you can visit: 127.0.0.1:8000/docs to see the API documentation.
+Once the server is running, if auth is disabled, you'll be able to access the API documentation at: http://localhost:8000/docs
 
 #### With Authentication
 
@@ -47,7 +47,7 @@ The server implements a very basic form of authentication that supports a single
    or
 
    ```shell
-   export APP_SECRET=$( let your cat walk across your keyboard)
+   export APP_SECRET="some_super_secure_password"
    ```
 
 2. Run with `uv`
@@ -70,3 +70,60 @@ The server implements a very basic form of authentication that supports a single
     ```
 
 Alternatively, deploy to your favorite cloud provider.
+
+
+## Client
+
+Once the server is running you can use the universal-tool-client to interact with it. 
+
+```shell
+pip install universal-tool-client
+```
+
+### Client
+
+```python
+from universal_tool_client import get_sync_client
+
+url = "http://localhost:8000"
+headers = {
+    "Authorization": "YOUR SECRET GOES HERE",
+}
+
+client = get_sync_client(url=url, headers=headers)
+
+print(client.health())  # Health check
+print(client.info())  # Server version and other information
+
+# List tools
+print(client.tools.list())  # List of tools
+# Call a tool
+print(client.tools.call("echo", {"msg": "hello"}))  # hello!
+
+# Get the tools as a LangchainTools object
+tools = client.tools.as_langchain_tools()
+```
+
+#### Curl
+
+No authentication:
+
+```shell
+curl -X 'POST' \
+  'http://127.0.0.1:8000/tools/call' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "$schema": "otc://1.0",
+  "request": {
+    "tool_id": "get_weather@1.0.0",
+    "input": { "city": "san francisco"}
+  }
+}'
+```
+
+With authentication:
+
+Add the `Authorization` header with the secret you generated earlier.
+
+e.g., `-H 'Authorization: YOUR SECRET`
